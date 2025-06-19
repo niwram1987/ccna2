@@ -32,10 +32,10 @@ config t
 	 description VOICEVLAN
 end
 
-!!!DAPAT 7 UNDER_SCORE ANG NA EDIT MO  ( LINE 34 to 68 PASTE TO COREBABA SWITCH )
+!!!DAPAT 7 UNDER22SCORE ANG NA EDIT MO  ( LINE 34 to 68 PASTE TO COREBABA SWITCH )
 !@@@LeafSwitchONLY
 config t
-   hostname COREbaba-_
+   hostname COREbaba-22
    enable secret pass
    service password-encryption
    no logging console
@@ -51,22 +51,22 @@ config t
    Int Gi 0/1
      no shutdown
 	  no switchport
-	  ip add 10._._.4 255.255.255.0
+	  ip add 10.22.22.4 255.255.255.0
    Int Vlan 1
      no shutdown
-	 ip add 10._.1.4 255.255.255.0
+	 ip add 10.22.1.4 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10._.10.4 255.255.255.0
+	 ip add 10.22.10.4 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10._.50.4 255.255.255.0
+	 ip add 10.22.50.4 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10._.100.4 255.255.255.0
+	 ip add 10.22.100.4 255.255.255.0
 	 description VOICEVLAN
 end
 
@@ -98,31 +98,31 @@ Int Range fa0/10-12
 !!!DAPAT 21 UNDER SCORE ANG NA EDIT MO  ( LINE 72 to 99 PASTE TO COREBABA SWITCH )
 !@@@LEAF SWITCH
 config t
-ip dhcp Excluded-add 10._.1.1 10._.1.100
-ip dhcp Excluded-add 10._.10.1 10._.10.100
-ip dhcp Excluded-add 10._.50.1 10._.50.100
-ip dhcp Excluded-add 10._.100.1 10._.100.100
+ip dhcp Excluded-add 10.22.1.1 10.22.1.100
+ip dhcp Excluded-add 10.22.10.1 10.22.10.100
+ip dhcp Excluded-add 10.22.50.1 10.22.50.100
+ip dhcp Excluded-add 10.22.100.1 10.22.100.100
 ip dhcp pool MGMTDATA
-   network 10._.1.0 255.255.255.0
-   default-router 10._.1.4
+   network 10.22.1.0 255.255.255.0
+   default-router 10.22.1.4
    domain-name MGMTDATA.COM
-   dns-server 10._.1.10
+   dns-server 10.22.1.10
 ip dhcp pool WIFIDATA
-   network 10._.10.0 255.255.255.0
-   default-router 10._.10.4
+   network 10.22.10.0 255.255.255.0
+   default-router 10.22.10.4
    domain-name WIFIDATA.COM
-   dns-server 10._.1.10
+   dns-server 10.22.1.10
 ip dhcp pool IPCCTV
-   network 10._.50.0 255.255.255.0
-   default-router 10._.50.4
+   network 10.22.50.0 255.255.255.0
+   default-router 10.22.50.4
    domain-name IPCCTV.COM
-   dns-server 10._.1.10
+   dns-server 10.22.1.10
 ip dhcp pool VOICEVLAN
-   network 10._.100.0 255.255.255.0
-   default-router 10._.100.4
+   network 10.22.100.0 255.255.255.0
+   default-router 10.22.100.4
    domain-name VOICEVLAN.COM
-   dns-server 10._.1.10
-   option 150 ip 10._.100.8   
+   dns-server 10.22.1.10
+   option 150 ip 10.22.100.8   
    END
 
 !!CREATING AND PLACING PORTS INSIDEAVLAN:
@@ -171,11 +171,11 @@ Int Fa 0/7
 config t
 ip routing
 ip dhcp pool CAMERA6
-host 10._.50.6 255.255.255.0
-client-identifier ____.22__.22__
+host 10.22.50.6 255.255.255.0
+client-identifier 22222222.222222.222222
 ip dhcp pool CAMERA8
-host 10._.50.8 255.255.255.0
-client-identifier____.22__.22__
+host 10.22.50.8 255.255.255.0
+client-identifier22222222.222222.222222
 end
 show ip dhcp binding
 
@@ -354,7 +354,7 @@ TASK3***TASK3***TASK3***
 PRIMARY EDGE ROUTER CONFIGURATION! owned by PLDT !!!
 !@@@EDGE ROUTE CONFIG
 config t
-   hostname EDGE-__
+   hostname EDGE-2222
    enable secret pass
    service password-encryption
    no logging console
@@ -377,7 +377,7 @@ config t
 	 no shutdown
    Int Loopback 0
      description VIRTUALIP-FOR-ROUTING
-	 ip add __.0.0.1 255.255.255.255
+	 ip add 2222.0.0.1 255.255.255.255
  end
 
 OPEN SHORTEST PATH FIRST/OSPF CONFIG.
@@ -387,10 +387,10 @@ sirc: sh ip route connected
 @EDGE:
 config t
 router ospf 1
-router-id _.0.0.1
+router-id 22.0.0.1
 network 200.0.0.0  0.0.0.255 area 0
-network 10._._.0  0.0.0.255 area 0
-network _.0.0.1  0.0.0.0 area 0
+network 10.22.22.0  0.0.0.255 area 0
+network 22.0.0.1  0.0.0.0 area 0
 Interface gi 0/0/0
  ip ospf network point-to-point
 end
@@ -398,8 +398,8 @@ end
 @CoreBABA:
 config t
 router ospf 1
-router-id 10._._.4
-network 10._.0.0  0.0.255.255 area 0
+router-id 10.22.22.4
+network 10.22.0.0  0.0.255.255 area 0
 int gi 0/1
  ip ospf network point-to-point
 end
@@ -408,7 +408,7 @@ end
 config t
 router ospf 1
 router-id 10.22.100.8
-network 10._.100.0  0.0.0.255  area 0
+network 10.22.100.0  0.0.0.255  area 0
 end
 
 
@@ -417,7 +417,7 @@ end
 conf t
  ip routing 
  ip route 10.11.0.0 255.255.0.0 200.0.0.11
- NO ip route 10.22.0.0 255.255.0.0 200.0.0._
+ NO ip route 10.22.0.0 255.255.0.0 200.0.0.22
  ip route 10.21.0.0 255.255.0.0 200.0.0.21
  ip route 10.22.0.0 255.255.0.0 200.0.0.22
  ip route 10.31.0.0 255.255.0.0 200.0.0.31
@@ -432,8 +432,8 @@ conf t
  ip route 10.72.0.0 255.255.0.0 200.0.0.72
  ip route 10.81.0.0 255.255.0.0 200.0.0.81
  ip route 10.82.0.0 255.255.0.0 200.0.0.82
- ip route 10._.0.0 255.255.0.0 10._._.4
- NO ip route 10.22.0.0 255.255.0.0 200.0.0._
+ ip route 10.22.0.0 255.255.0.0 10.22.22.4
+ NO ip route 10.22.0.0 255.255.0.0 200.0.0.22
  end
  
 *********************************************
@@ -442,20 +442,20 @@ Layer three/3 switch ROUTING = 300k up!!!
 !SI SWITCH ASA/DIKIT KAY EDGE PARA MAKALABAS
 conf t 
 ip routing
-ip route 0.0.0.0 0.0.0.0 10._._.1
+ip route 0.0.0.0 0.0.0.0 10.22.22.1
 end
 
 @CUCM:DEFAULT ROUTING( 0.0.0.0 0.0.0.0) FOR CUCM:
 !SI CUCM ASA/DIKIT KAY SWITCH VLAN 100 PARA MAKALABAS
 conf t
 ip routing
-ip route 0.0.0.0 0.0.0.0 10._.100.4
+ip route 0.0.0.0 0.0.0.0 10.22.100.4
 end
 
 !How to Static Route windows Server:
 cmd
-route  add   10.0.0.0   mask   255.0.0.0    10._.1.4
-route  add  200.0.0.0   mask  255.255.255.0   10._.1.4
+route  add   10.0.0.0   mask   255.0.0.0    10.22.1.4
+route  add  200.0.0.0   mask  255.255.255.0   10.22.1.4
 
 ********************************************
 
@@ -465,15 +465,15 @@ route  add  200.0.0.0   mask  255.255.255.0   10._.1.4
 config t
 dial-peer voice 69 voip
  service rivanaa out-bound
- destination-pattern _69
- session target ipv4:10._.100.8
- incoming called-number _69
+ destination-pattern 2269
+ session target ipv4:10.22.100.8
+ incoming called-number 2269
  dtmf-relay h245-alphanumeric
  codec g711ulaw
  no vad
 !
 telephony-service
- moh "flash:/en_bacd_music_on_hold.au"
+ moh "flash:/en22bacd22music22on22hold.au"
 !
 application
  service rivanaa flash:app-b-acd-aa-3.0.0.2.tcl
@@ -481,7 +481,7 @@ application
   param number-of-hunt-grps 2
   param dial-by-extension-option 8
   param handoff-string rivanaa
-  param welcome-prompt flash:en_bacd_welcome.au
+  param welcome-prompt flash:en22bacd22welcome.au
   paramspace english language en
   param call-retry-timer 15
   param service-name rivanqueue
@@ -490,13 +490,13 @@ application
   param max-time-vm-retry 2
   param voice-mail 1234
   param max-time-call-retry 700
-  param aa-pilot _69
+  param aa-pilot 2269
  service rivanqueue flash:app-b-acd-3.0.0.2.tcl
   param queue-len 15
-  param aa-hunt1 _00
-  param aa-hunt2 _77
-  param aa-hunt3 _01
-  param aa-hunt4 _33
+  param aa-hunt1 2200
+  param aa-hunt2 2277
+  param aa-hunt3 2201
+  param aa-hunt4 2233
   param queue-manager-debugs 1
   param number-of-hunt-grps 4
 ****************************************************************************
@@ -571,7 +571,7 @@ DEBUG COMMANDS
 =============================================================
 
           
-http://docwiki.cisco.com/wiki/Cisco_IOS_Voice_Troubleshooting_and_Monitoring_--_Tcl_IVR_Troubleshooting
+http://docwiki.cisco.com/wiki/Cisco22IOS22Voice22Troubleshooting22and22Monitoring22--22Tcl22IVR22Troubleshooting
 
 debug voice application ?
 debug voice application error
@@ -603,38 +603,38 @@ conf t
 !
  voice register global
   mode cme
-  source-address 10._.100.8 port 5060
+  source-address 10.22.100.8 port 5060
   max-dn 12
   max-pool 12
   authenticate register
   create profile sync
  voice register dn 1
-   number ____
+   number 22222222
    allow watch
-   name _______
+   name 22222222222222
  voice register dn 2
-   number ___
+   number 222222
    allow watch
-   name _______
+   name 22222222222222
 !
   voice register pool 1
-    id mac ____.22__.22__
+    id mac 22222222.222222.222222
     number 1 dn 1
     dtmf-relay sip-notify
-    username ____ password ____
+    username 22222222 password 22222222
     codec g711ulaw
 !
   voice register pool 2
-    id mac ____.22__.22__
+    id mac 22222222.222222.222222
     number 1 dn 2
     dtmf-relay sip-notify
-    username ____ password ____
+    username 22222222 password 22222222
     codec g711ulaw
 !
 *******call other countries!!!********
 config t
 !
-dial-peer voice _ voip
+dial-peer voice 22 voip
 destination-pattern k..
 session protocol sipv2
 session target sip-server
