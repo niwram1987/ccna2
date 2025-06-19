@@ -123,11 +123,11 @@ ping  www.yourschool.edu.ph = _________
 config t
 NO ip access-list standard NOISKUL
 ip access-list standard NOISKUL
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
+DENY   172.67.0.0  0.0.255.255
+DENY   50.6.0.0   0.0.255.255
+DENY   184.168.0.0  0.0.255.255
+DENY   155.137.0.0  0.0.255.255
+DENY   222.127.0.0   0.0.255.255
 Permit Any
 Int Gi 1
  ip access-group NOISKUL in
@@ -143,11 +143,13 @@ www.iptorrents.com  104.26.   95.211.
 config t
 NO ip access-list standard NOTORS
 ip access-list standard NOTORS
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
+DENY  162.159.0.0   0.0.255.255
+DENY    172.67.0.0   0.0.255.255
+DENY   76.223.0.0   0.0.255.255
+DENY   104.21.0.0  0.0.255.255
+DENY   104.26.0.0  0.0.255.255
+DENY   104.21.0.0  0.0.255.255
+DENY   84.32.0.0  0.0.255.255
 Permit Any
 Int Gi 1
  ip access-group NOTORS in
@@ -315,7 +317,7 @@ tcp,udp,icmp,IP     Any      web310/11
 Config t
 service timestamps log datetime
 service timestamps debug datetime
-logging 10.m.1.10
+logging 10.22.1.10
 logging trap 5
 NO IP access-list Extended FWP1
 IP access-list Extended FWP1
@@ -327,7 +329,7 @@ IP access-list Extended FWP1
  Permit tcp Any host www.web311.com eq 22 log
  Int Gi 3
   ip access-group FWP1 in
-REMOVE FIREWALL:
+!REMOVE FIREWALL:
 CONfig t
  Int Gi 3
   NO ip access-group FWP1 in
