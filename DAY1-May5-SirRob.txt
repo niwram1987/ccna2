@@ -175,7 +175,7 @@ host 10.22.50.6 255.255.255.0
 client-identifier 22222222.222222.222222
 ip dhcp pool CAMERA8
 host 10.22.50.8 255.255.255.0
-client-identifier22222222.222222.222222
+client-identifier 22222222.222222.222222
 end
 show ip dhcp binding
 
@@ -288,18 +288,18 @@ configure terminal
  destination-pattern 11..
  session target ipv4:10.11.100.8
  codec g711ULAW
- ! dial-peer voice 12 Voip
- ! destination-pattern 12..
- ! session target ipv4:10.12.100.8
- ! codec g711ULAW
+ dial-peer voice 12 Voip
+ destination-pattern 12..
+ session target ipv4:10.12.100.8
+ codec g711ULAW
 dial-peer voice 21 Voip
  destination-pattern 21..
  session target ipv4:10.21.100.8
  codec g711ULAW
-dial-peer voice 22 Voip
- destination-pattern 22..
- session target ipv4:10.22.100.8
- codec g711ULAW
+!dial-peer voice 22 Voip
+ !destination-pattern 22..
+ !session target ipv4:10.22.100.8
+ !codec g711ULAW
 dial-peer voice 31 Voip
  destination-pattern 31..
  session target ipv4:10.31.100.8
@@ -377,7 +377,7 @@ config t
 	 no shutdown
    Int Loopback 0
      description VIRTUALIP-FOR-ROUTING
-	 ip add 2222.0.0.1 255.255.255.255
+	 ip add 10.22.0.0.1 255.255.255.255
  end
 
 OPEN SHORTEST PATH FIRST/OSPF CONFIG.
